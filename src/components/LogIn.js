@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
 import {Navigate,Link} from 'react-router-dom';
 
 class LogIn extends Component {
@@ -12,6 +12,8 @@ class LogIn extends Component {
         redirect: false
       }
     }
+    // const [userName,setUsername] = useState("");
+    // const [password,setPassword] = useState("");
     handleChange=(e)=>{
         const updatedUser={...this.state.user};
         const inputField=e.target.name;

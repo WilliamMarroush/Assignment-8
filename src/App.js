@@ -1,37 +1,24 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import {Link} from 'react-router-dom';
 import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import LogIn from './components/LogIn';
 import Debits from './components/Debits';
-class App extends Component {
-  constructor(){
-    super();
-    this.state={
-      accountBalance:14568.27,
-      currentUser:{
-        userName:'bob_outlaw',
-        memberSince:'08/23/99',
-      }
-    }
+function App (){
+  const [userName,setUsername]=useState("");
+  const [memberSince,setMembersince]=useState("");
+  const [accountBalance,setAccountbalance]=useState(0);
+
+  const mockLogIn = (logInInfo)=>{
+    setUsername(logInInfo.userName);
   }
-  mockLogIn = (logInInfo)=>{
-    const newUser={...this.state.currentUser};
-    newUser.userName=logInInfo.userName;
-    this.setState({currentUser:newUser});
-  }
-  render(){
-    const HomeComponent =()=>(<Home accountBalance={this.state.accountBalance}/>)
-    const UserProfileComponent = ()=>(
-      <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}/>
-    )
-    const LogInComponent = ()=>(
-      <LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} {...this.props}/>)
-    const DebitsComponent=()=>{
-      <Debits></Debits>
-    }
-      return (
+  const HomeComponent =()=>(<Home accountBalance={accountBalance}/>)
+  const UserProfileComponent = ()=>(
+      <UserProfile userName={userName} memberSince={memberSince}/>
+  )
+  const LogInComponent = ()=>(
+      <LogIn user={{userName:userName,memberSince:memberSince}} mockLogIn={mockLogIn}/>)
+  return (
     <div className="container">
       <Router>
         <Routes>
@@ -43,6 +30,5 @@ class App extends Component {
       </Router>
     </div>
   );
-  }
 }
 export default App;
