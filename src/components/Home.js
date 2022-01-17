@@ -1,8 +1,7 @@
-import React,{Component} from 'react'
+import React from 'react'
 import AccountBalance from './AccountBalance';
 import {Link} from 'react-router-dom';
- class Home extends Component{
-     render(){
+function Home(props){
     return (
         <div>
             <img src="https://communitybank.net/wp-content/uploads/2015/12/bank-icon-300x300.jpg" alt="bank"/>
@@ -12,10 +11,8 @@ import {Link} from 'react-router-dom';
             <Link to="/login">Log in Page</Link>
             <br></br>
             <Link to="/Debits">Debits Page</Link>
-            <AccountBalance accountBalance={this.props.accountBalance}/>
+            <AccountBalance accountBalance={props.accountBalance}/>
         </div>
     )
-     }
 }
-
 export default Home;

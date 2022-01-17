@@ -1,17 +1,15 @@
 import React,{Component} from 'react'
 import {Link} from 'react-router-dom';
 
-class UserProfile extends Component{
-    render(){
-        return(
-        <div>
-            <h1>User Profile</h1>
+function UserProfile(props){                                          
+    return(
+    <div>
+        <h1>User Profile</h1>
 
-            <div>Username: {this.props.userName}</div>
-            <div>Member Since: {this.props.memberSince}</div>
-            <Link to="/">HomePage</Link>
-        </div>
-        );
-    }
+        <div>Username: {props.userName}</div>
+        <div>Member Since: {props.memberSince}</div>
+        <Link to="/">HomePage</Link>
+    </div>
+    );
 }
 export default UserProfile;

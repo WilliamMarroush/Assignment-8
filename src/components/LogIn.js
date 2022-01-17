@@ -1,50 +1,53 @@
-import React, { Component,useState } from 'react';
+import React, { Component } from 'react';
 import {Navigate,Link} from 'react-router-dom';
 
-class LogIn extends Component {
-    constructor () {
-      super()
-      this.state = {
-        user: {
-          userName: '',
-          password: ''
-        },
-        redirect: false
-      }
-    }
-    // const [userName,setUsername] = useState("");
-    // const [password,setPassword] = useState("");
-    handleChange=(e)=>{
-        const updatedUser={...this.state.user};
-        const inputField=e.target.name;
-        const inputValue=e.target.value;
-        updatedUser[inputField]=inputValue;
-        this.setState({user:updatedUser});
-    }
-    handleSubmit=(e)=>{
+function LogIn(props){
+    const {user,setUser}=props;
+    const {truthval,setTruthval}=props;
+
+    const handleSignIn=(e)=>{
         e.preventDefault();
-        this.props.mockLogIn(this.state.user);
-        this.setState({redirect:true});
-    }
-    render(){
-        if (this.state.redirect){
-            return(<Navigate to="/userProfile"/>);
+        let uname = document.getElementById("userName").value;
+        let pass = document.getElementById("password").value;
+
+        if (uname==user.username){
+            if (pass==user.password){
+                return(<Navigate to="/UserProfile"/>)
+            }
         }
-        return(
-            <div className="container d-flex d-column justify-content-center">
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="userName">User Name</label>
-                        <input type="text" name="userName" onChange={this.handleChange} value={this.state.user.userName}/>
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="text" name="password"/>
-                    </div>
-                    <Link to="/">HomePage</Link>
-                </form>
-            </div>
-        )
     }
+    const handleSignUp=(e)=>{
+        e.preventDefault();
+        let uname = document.getElementById("userName").value;
+        let pass = document.getElementById("password").value;
+        let date= new Date();
+        date= `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        let tempuser = (user);
+        tempuser.username=uname;
+        tempuser.password=pass;
+        tempuser.memberSince=date;
+        setUser(tempuser);
+    }
+    if (truthval){
+        return(<Navigate to="/userProfile"/>);
+    }
+    return(
+        <div className="container d-flex d-column justify-content-center login-holder">
+            <form>
+                <div>
+                    <label htmlFor="userName">User Name</label>
+                    <input type="text" id="userName"/>
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input type="text" id="password"/>
+                </div>
+                <button type="submit" className="sign-in" onClick={handleSignIn}>Sign in</button>
+                OR
+                <button type="submit" className="sign-up" onClick={handleSignUp}>Sign up</button><br/>
+                <Link to="/">HomePage</Link>
+            </form>
+        </div>
+    )
 } 
 export default LogIn;
