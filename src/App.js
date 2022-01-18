@@ -50,10 +50,10 @@ function App (){
   }
   const HomeComponent =()=>(<Home accountbalance={accountbalance}/>)
   const UserProfileComponent = ()=>(
-      <UserProfile userName={userName} memberSince={memberSince}/>
+      <UserProfile truthval={truthval} setTruthval={setTruthval} userName={userName} memberSince={memberSince}/>
   )
   const LogInComponent = ()=>(
-      <LogIn username={userName} password = {password} setUsername = {setUsername} setPassword = {setPassword} mockLogIn={mockLogIn} memberSince={memberSince} setMembersince={setMembersince}/>)
+      <LogIn truthval={truthval} setTruthval={setTruthval} userName={userName} password = {password} setUsername = {setUsername} setPassword = {setPassword} mockLogIn={mockLogIn} memberSince={memberSince} setMembersince={setMembersince}/>)
   return (
     <div className="container">
       <Router>

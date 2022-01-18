@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Navigate,Link} from 'react-router-dom';
 
 function LogIn(props){
@@ -11,17 +11,13 @@ function LogIn(props){
         e.preventDefault();
         let uname = document.getElementById("userName").value;
         let pass = document.getElementById("password").value;
-        console.log("uname=",uname,"username=",userName);
-        console.log("pass=",pass,"password=",password);
-
         if (uname==userName && pass==password){
-            return(<Navigate to="/UserProfile"/>)
+            setTruthval(true);
         }
         else{
             return(<div>You logged in incorrectly</div>)
         }
     }
-
     const handleSignUp=(e)=>{
         e.preventDefault();
         let uname = document.getElementById("userName").value;
@@ -32,7 +28,10 @@ function LogIn(props){
         setUsername(uname);
         setPassword(pass);
         setMembersince(date);
-        return(<Navigate to="/UserProfile/"/>);
+        setTruthval(true);
+    }
+    if (truthval){
+        return <Navigate to='../UserProfile'/>;
     }
     return(
         <div className="container d-flex d-column justify-content-center login-holder">
