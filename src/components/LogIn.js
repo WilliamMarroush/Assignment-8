@@ -2,34 +2,37 @@ import React, { Component } from 'react';
 import {Navigate,Link} from 'react-router-dom';
 
 function LogIn(props){
-    const {user,setUser}=props;
+    const {userName,setUsername}=props;
+    const {password,setPassword}=props;
     const {truthval,setTruthval}=props;
+    const {memberSince,setMembersince}=props;
 
     const handleSignIn=(e)=>{
         e.preventDefault();
         let uname = document.getElementById("userName").value;
         let pass = document.getElementById("password").value;
+        console.log("uname=",uname,"username=",userName);
+        console.log("pass=",pass,"password=",password);
 
-        if (uname==user.username){
-            if (pass==user.password){
-                return(<Navigate to="/UserProfile"/>)
-            }
+        if (uname==userName && pass==password){
+            return(<Navigate to="/UserProfile"/>)
+        }
+        else{
+            return(<div>You logged in incorrectly</div>)
         }
     }
+
     const handleSignUp=(e)=>{
         e.preventDefault();
         let uname = document.getElementById("userName").value;
+        console.log(uname);
         let pass = document.getElementById("password").value;
         let date= new Date();
         date= `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-        let tempuser = (user);
-        tempuser.username=uname;
-        tempuser.password=pass;
-        tempuser.memberSince=date;
-        setUser(tempuser);
-    }
-    if (truthval){
-        return(<Navigate to="/userProfile"/>);
+        setUsername(uname);
+        setPassword(pass);
+        setMembersince(date);
+        return(<Navigate to="/UserProfile/"/>);
     }
     return(
         <div className="container d-flex d-column justify-content-center login-holder">

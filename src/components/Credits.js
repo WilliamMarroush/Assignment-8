@@ -1,10 +1,8 @@
-import React,{useState,useEffect} from 'react';
-import AccountBalance from './AccountBalance';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
-function Debits(props){
+export default function Credits(props) {
     const {accountbalance,setAccountbalance}=props;
-    const {debittrans,setDebittrans}=props;
+    const {credittrans,setCredittrans}=props;
     const handleSubmit = (e)=>{
         e.preventDefault();
         let amt = parseFloat(document.getElementById("Amount").value);
@@ -12,15 +10,15 @@ function Debits(props){
         let date= new Date();
         date= `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
         let thistrans = {amount:amt,description:dsc,date:date};
-        let copy = [...debittrans];
+        let copy = [...credittrans];
         copy.push(thistrans);
-        setDebittrans(copy);
-        setAccountbalance((amount)=> amount-=amt);
+        setCredittrans(copy);
+        setAccountbalance((amount)=> amount+=amt);
     }
-    return(
+    return (
         <div>
             <div className="d-flex flex-column justify-content-center">
-                <h1>Debits Page</h1>
+                <h1>Credits Page</h1>
                 <br></br>
                 <div className="container addition">
                 <form className="amt_dsc" onSubmit={handleSubmit}>
@@ -35,25 +33,25 @@ function Debits(props){
                 </div>
                 </div>
                 <Link to="/">HomePage</Link>
-            </div>
-            <div className="d-flex flex-column justify-content-right" id="debtList">
+                <div className="d-flex flex-column justify-content-right" id="debtList">
                 <h2 id="deblist" className="d-flex flex-row justify-content-between">
-                    <u>Debits</u>
+                    <u>Credits</u>
                     <u>Price</u>
-                    <u>Date of Debit</u>
+                    <u>Date of Credit</u>
                     </h2>
             </div>
             {
-            debittrans.map((piece,idx)=>{
-                return(
-                    <div key={idx} className="d-flex flex-direction:column-reverse debit justify-content-between">
-                        <h2>{piece.description}</h2><br/>
-                        <h3>Price:  ${piece.amount}</h3><br/>
-                        <p>Date: {piece.date.substring(0,10)} </p><br/>
-                        <br/><br/>
-                    </div>
-                )
-            })}
+                credittrans.map((piece,idx)=>{
+                    return(
+                        <div key={idx} className="d-flex flex-direction:column-reverse debit justify-content-between">
+                            <h2>{piece.description}</h2><br/>
+                            <h3>Price:  ${piece.amount}</h3><br/>
+                            <p>Date: {piece.date.substring(0,10)} </p><br/>
+                            <br/><br/>
+                        </div>
+                    )})
+            }
+            </div>
         </div>
-    )}
-export default Debits;
+    )
+}
